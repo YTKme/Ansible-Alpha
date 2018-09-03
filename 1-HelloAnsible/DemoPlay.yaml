@@ -1,0 +1,24 @@
+---
+- name: "Do A Demo"
+  hosts: db
+
+  tasks:
+    - name: Demo Task 1
+      debug:
+        msg: "This Is Task 1"
+    - name: Demo Task 2
+      fail:
+        msg: "This Is Task 2"
+      when: inventory_hostname == "or1010051242053.corp.adobe.com"
+
+- name: "Do Another Demo"
+  hosts: web
+  serial: 1
+
+  tasks:
+    - name: Demo Task 3
+      debug:
+        msg: "This Is Task 3"
+    - name: Demo Task 4
+      debug:
+        msg: "This Is Task 4"

@@ -1,0 +1,18 @@
+---
+- name: Update CentOS System
+  hosts: centos
+
+  tasks:
+  - name: Upgrade All Package
+    yum:
+      name: '*'
+      state: latest
+      exclude: kernel*
+
+- name: Update Ubuntu System
+  hosts: ubuntu
+
+  tasks:
+  - name: Update All Package
+    apt:
+      upgrade: dist
