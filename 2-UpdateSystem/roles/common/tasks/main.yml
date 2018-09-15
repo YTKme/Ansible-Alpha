@@ -1,0 +1,78 @@
+---
+- name: Upgrade redhat System
+  yum:
+    name: '*'
+    state: latest
+    exclude: kernel*
+  when: ansible_distribution|lower == 'redhat' or ansible_distribution|lower == 'centos'
+  tags:
+    - update
+    - base
+
+- name: Update debian System (equivalent of "apt-get update")
+  apt:
+    update_cache: yes
+  when: ansible_distribution|lower == 'debian' or ansible_distribution|lower == 'ubuntu'
+  tags:
+    - update
+    - base
+
+- name: Upgrade debian System
+  apt:
+    upgrade: dist
+  when: ansible_distribution|lower == 'debian' or ansible_distribution|lower == 'ubuntu'
+  tags:
+    - update
+    - base
+
+- name: Install Bash Completion for redhat System
+  yum:
+    name: bash-completion
+    state: latest
+  when: ansible_distribution|lower == 'redhat' or ansible_distribution|lower == 'centos'
+  tags:
+    - bash
+    - base
+
+- name: Install Bash Completion for debian System
+  apt:
+    name: bash-completion
+    state: latest
+    update_cache: yes
+  when: ansible_distribution|lower == 'debian' or ansible_distribution|lower == 'ubuntu'
+  tags:
+    - bash
+    - base
+
+- name: Install Development Tools for redhat System
+  yum:
+    name: '@Development Tools'
+    state: present
+  when: ansible_distribution|lower == 'redhat' or ansible_distribution|lower == 'centos'
+  tags:
+    - development
+    - base
+
+- name: Install Build Essential for debian System
+  apt:
+    name: build-essential
+    state: latest
+    update_cache: yes
+  when: ansible_distribution|lower == 'debian' or ansible_distribution|lower == 'ubuntu'
+  tags:
+    - development
+    - base
+
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes
+  when: ansible_distribution|lower == 'debian' or ansible_distribution|lower == 'ubuntu'
+  tags:
+    - clean
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+  when: ansible_distribution|lower == 'debian' or ansible_distribution|lower == 'ubuntu'
+  tags:
+    - clean

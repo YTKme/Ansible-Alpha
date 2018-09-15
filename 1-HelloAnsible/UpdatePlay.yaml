@@ -9,10 +9,10 @@
       state: latest
       exclude: kernel*
 
-- name: Update Ubuntu System
-  hosts: ubuntu
+  - name: Update Ubuntu System
+    hosts: ubuntu
 
-  tasks:
-  - name: Update All Package
-    apt:
-      upgrade: dist
+    tasks:
+    - name: Update All Package
+      apt:
+        upgrade: dist

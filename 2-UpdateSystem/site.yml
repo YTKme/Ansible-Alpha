@@ -1,0 +1,7 @@
+---
+- name: Update System
+  hosts: all
+  remote_user: root
+
+  roles:
+    - common
