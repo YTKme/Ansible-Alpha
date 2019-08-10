@@ -1,0 +1,17 @@
+---
+- name: Install NGINX for redhat System
+  yum:
+    name: nginx
+    state: latest
+  when: ansible_distribution|lower == 'redhat' or ansible_distribution|lower == 'centos'
+  tags:
+    - nginx
+
+- name: Install NGINX for debian System
+  apt:
+    name: nginx
+    state: latest
+    update_cache: yes
+  when: ansible_distribution|lower == 'debian' or ansible_distribution|lower == 'ubuntu'
+  tags:
+    - nginx

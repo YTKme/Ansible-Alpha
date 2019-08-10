@@ -1,0 +1,3 @@
+[master]
+a-platform ansible_host=or1010051149219.corp.adobe.com ansible_user=jnks4all
+b-platform ansible_host=or1010051012193.corp.adobe.com ansible_user=jnks4all
